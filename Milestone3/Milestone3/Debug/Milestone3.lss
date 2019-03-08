@@ -1,0 +1,753 @@
+
+Milestone3.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  00000612  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000059e  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          0000001e  00800100  00800100  00000612  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000612  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000644  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000078  00000000  00000000  00000684  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000008a7  00000000  00000000  000006fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000069b  00000000  00000000  00000fa3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000004c6  00000000  00000000  0000163e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000001bc  00000000  00000000  00001b04  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000004c2  00000000  00000000  00001cc0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000036e  00000000  00000000  00002182  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000068  00000000  00000000  000024f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 0f 02 	jmp	0x41e	; 0x41e <__vector_1>
+   8:	0c 94 69 02 	jmp	0x4d2	; 0x4d2 <__vector_2>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 d7 01 	jmp	0x3ae	; 0x3ae <__vector_14>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 ab 01 	jmp	0x356	; 0x356 <__vector_21>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	ae 31       	cpi	r26, 0x1E	; 30
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 c3 02 	call	0x586	; 0x586 <main>
+  88:	0c 94 cd 02 	jmp	0x59a	; 0x59a <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <ADCinit>:
+	MCUSR = MCUSR & 0xF7;
+}
+
+// Initializes the ADC component to convert the ACD0 input with a 128 prescaler and auto conversion
+ void ADCinit(){
+	ADMUX = 1 << REFS0; // AVCC with external capacitor at AREF pin, ADC0 selected
+  90:	ec e7       	ldi	r30, 0x7C	; 124
+  92:	f0 e0       	ldi	r31, 0x00	; 0
+  94:	80 e4       	ldi	r24, 0x40	; 64
+  96:	80 83       	st	Z, r24
+	ADMUX |= 1<<ADLAR; // ADC Left Adjust Result to use ADCH register for 8-bit operations (ignore 2 Least Significant Bits)
+  98:	80 81       	ld	r24, Z
+  9a:	80 62       	ori	r24, 0x20	; 32
+  9c:	80 83       	st	Z, r24
+	ADCSRA = 1 << ADEN; // Analog to Digital Enable
+  9e:	ea e7       	ldi	r30, 0x7A	; 122
+  a0:	f0 e0       	ldi	r31, 0x00	; 0
+  a2:	80 e8       	ldi	r24, 0x80	; 128
+  a4:	80 83       	st	Z, r24
+	ADCSRA |= 1<<ADATE; // Auto Trigger Enable Conversion
+  a6:	80 81       	ld	r24, Z
+  a8:	80 62       	ori	r24, 0x20	; 32
+  aa:	80 83       	st	Z, r24
+	ADCSRA |= 1<<ADIE; // ADC Conversion Complete Interrupt activated
+  ac:	80 81       	ld	r24, Z
+  ae:	88 60       	ori	r24, 0x08	; 8
+  b0:	80 83       	st	Z, r24
+	ADCSRA |= 1<<ADPS2 | 1<<ADPS1 | 1<<ADPS0; // Set prescaler to clk/128
+  b2:	80 81       	ld	r24, Z
+  b4:	87 60       	ori	r24, 0x07	; 7
+  b6:	80 83       	st	Z, r24
+	ADCSRA |= 1<<ADSC; // Start Conversions
+  b8:	80 81       	ld	r24, Z
+  ba:	80 64       	ori	r24, 0x40	; 64
+  bc:	80 83       	st	Z, r24
+  be:	08 95       	ret
+
+000000c0 <MicrosTimerInit>:
+
+// Initializes Timer/Counter2 in CTC mode to trigger an interrupt every 160 clock ticks or 10 us
+void MicrosTimerInit(){
+	// Set Timer 2 to CTC mode, TOP = OCR2A, Immediate update of OCR2A, TOV Flag set on MAX, 
+	// Normal port operation, OC2A disconnected
+	TCCR0A = 1<<WGM01;
+  c0:	82 e0       	ldi	r24, 0x02	; 2
+  c2:	84 bd       	out	0x24, r24	; 36
+	TCCR0B = 1 << CS01; // Set prescaler to clk/8
+  c4:	85 bd       	out	0x25, r24	; 37
+	TIMSK0 = 1 << OCIE0A; // Enable CTC interrupt
+  c6:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__TEXT_REGION_LENGTH__+0x7e006e>
+	OCR0A = 20; // Set TOP value to 20
+  ca:	84 e1       	ldi	r24, 0x14	; 20
+  cc:	87 bd       	out	0x27, r24	; 39
+  ce:	08 95       	ret
+
+000000d0 <PhotoInterruptersInit>:
+}
+
+// Initializes the front and rear Photo-Interrupter Sensors on INT0 & INT1 respectively to trigger 
+// interrupts on any of their state change
+void PhotoInterruptersInit(){
+	EIMSK = 1<<INT1 | 1<<INT0; // Enable INT0 and INT1
+  d0:	83 e0       	ldi	r24, 0x03	; 3
+  d2:	8d bb       	out	0x1d, r24	; 29
+	EICRA = 0<<ISC11 | 1<<ISC10 | 0<<ISC01 | 1<<ISC00; // Trigger INT0 and INT1 on any state change
+  d4:	85 e0       	ldi	r24, 0x05	; 5
+  d6:	80 93 69 00 	sts	0x0069, r24	; 0x800069 <__TEXT_REGION_LENGTH__+0x7e0069>
+  da:	08 95       	ret
+
+000000dc <ServoPWMinit>:
+}
+
+// Initializes PWM signal on PB1 & PB2 for front & back servo respectively
+void ServoPWMinit(){
+	DDRB = 1<<DDB1 | 1<<DDB2; // Set PB1 & PB2 as outputs for OC1A and OC1B respectively
+  dc:	86 e0       	ldi	r24, 0x06	; 6
+  de:	84 b9       	out	0x04, r24	; 4
+	// Non-Inverting mode - Set OC1A/OC1B on compare match when up-counting. 
+	// Clear OC1A/OC1B on compare match when down counting.
+	TCCR1A=1<<COM1A1 | 1<<COM1B1 | 1<<WGM11;
+  e0:	82 ea       	ldi	r24, 0xA2	; 162
+  e2:	80 93 80 00 	sts	0x0080, r24	; 0x800080 <__TEXT_REGION_LENGTH__+0x7e0080>
+	TCCR1B=1<<WGM13 | 1<<WGM12; // Fast PWM
+  e6:	e1 e8       	ldi	r30, 0x81	; 129
+  e8:	f0 e0       	ldi	r31, 0x00	; 0
+  ea:	88 e1       	ldi	r24, 0x18	; 24
+  ec:	80 83       	st	Z, r24
+	TCCR1B|=1<<CS11; // Set prescaler to clk/8
+  ee:	80 81       	ld	r24, Z
+  f0:	82 60       	ori	r24, 0x02	; 2
+  f2:	80 83       	st	Z, r24
+	ICR1=40000;	// PWM Frequency = 50Hz (Period = 20ms Standard).
+  f4:	80 e4       	ldi	r24, 0x40	; 64
+  f6:	9c e9       	ldi	r25, 0x9C	; 156
+  f8:	90 93 87 00 	sts	0x0087, r25	; 0x800087 <__TEXT_REGION_LENGTH__+0x7e0087>
+  fc:	80 93 86 00 	sts	0x0086, r24	; 0x800086 <__TEXT_REGION_LENGTH__+0x7e0086>
+ 100:	08 95       	ret
+
+00000102 <checkWheelsFrequencies>:
+}
+
+// Check for difference between the frequencies of the two wheels
+// Returns 0 when equal, 1 when FrontPeriod - RearPeriod > DIFFERENCE_THRESHOLD, 
+// -1 when FrontPeriod - RearPeriod < DIFFERENCE_THRESHOLD
+void checkWheelsFrequencies(){
+ 102:	0f 93       	push	r16
+ 104:	1f 93       	push	r17
+	// If there are no new pulse periods measurements return the last decision
+	// Considers the state when the bike is stopped and no pulses are sent from the servos
+	// but still want to brake
+	if(microsFrontWheel > MAX_PERIOD && microsRearWheel > MAX_PERIOD){ // Stopped
+ 106:	80 91 1a 01 	lds	r24, 0x011A	; 0x80011a <microsFrontWheel>
+ 10a:	90 91 1b 01 	lds	r25, 0x011B	; 0x80011b <microsFrontWheel+0x1>
+ 10e:	a0 91 1c 01 	lds	r26, 0x011C	; 0x80011c <microsFrontWheel+0x2>
+ 112:	b0 91 1d 01 	lds	r27, 0x011D	; 0x80011d <microsFrontWheel+0x3>
+ 116:	81 31       	cpi	r24, 0x11	; 17
+ 118:	97 42       	sbci	r25, 0x27	; 39
+ 11a:	a1 05       	cpc	r26, r1
+ 11c:	b1 05       	cpc	r27, r1
+ 11e:	90 f0       	brcs	.+36     	; 0x144 <checkWheelsFrequencies+0x42>
+ 120:	80 91 16 01 	lds	r24, 0x0116	; 0x800116 <microsRearWheel>
+ 124:	90 91 17 01 	lds	r25, 0x0117	; 0x800117 <microsRearWheel+0x1>
+ 128:	a0 91 18 01 	lds	r26, 0x0118	; 0x800118 <microsRearWheel+0x2>
+ 12c:	b0 91 19 01 	lds	r27, 0x0119	; 0x800119 <microsRearWheel+0x3>
+ 130:	81 31       	cpi	r24, 0x11	; 17
+ 132:	97 42       	sbci	r25, 0x27	; 39
+ 134:	a1 05       	cpc	r26, r1
+ 136:	b1 05       	cpc	r27, r1
+ 138:	28 f0       	brcs	.+10     	; 0x144 <checkWheelsFrequencies+0x42>
+		checkWheelsFrequenciesReturnValue = 0;
+ 13a:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_edata+0x1>
+ 13e:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
+		return;
+ 142:	c5 c0       	rjmp	.+394    	; 0x2ce <checkWheelsFrequencies+0x1cc>
+	}else if(microsFrontWheel > MAX_PERIOD && rearWheelUnreadPulsesNumber>=5){ // Rear Wheel moved
+ 144:	80 91 1a 01 	lds	r24, 0x011A	; 0x80011a <microsFrontWheel>
+ 148:	90 91 1b 01 	lds	r25, 0x011B	; 0x80011b <microsFrontWheel+0x1>
+ 14c:	a0 91 1c 01 	lds	r26, 0x011C	; 0x80011c <microsFrontWheel+0x2>
+ 150:	b0 91 1d 01 	lds	r27, 0x011D	; 0x80011d <microsFrontWheel+0x3>
+ 154:	81 31       	cpi	r24, 0x11	; 17
+ 156:	97 42       	sbci	r25, 0x27	; 39
+ 158:	a1 05       	cpc	r26, r1
+ 15a:	b1 05       	cpc	r27, r1
+ 15c:	a8 f0       	brcs	.+42     	; 0x188 <checkWheelsFrequencies+0x86>
+ 15e:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <rearWheelUnreadPulsesNumber>
+ 162:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <rearWheelUnreadPulsesNumber+0x1>
+ 166:	05 97       	sbiw	r24, 0x05	; 5
+ 168:	7c f0       	brlt	.+30     	; 0x188 <checkWheelsFrequencies+0x86>
+		microsFrontWheel=0;
+ 16a:	10 92 1a 01 	sts	0x011A, r1	; 0x80011a <microsFrontWheel>
+ 16e:	10 92 1b 01 	sts	0x011B, r1	; 0x80011b <microsFrontWheel+0x1>
+ 172:	10 92 1c 01 	sts	0x011C, r1	; 0x80011c <microsFrontWheel+0x2>
+ 176:	10 92 1d 01 	sts	0x011D, r1	; 0x80011d <microsFrontWheel+0x3>
+		checkWheelsFrequenciesReturnValue = 1;
+ 17a:	81 e0       	ldi	r24, 0x01	; 1
+ 17c:	90 e0       	ldi	r25, 0x00	; 0
+ 17e:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <_edata+0x1>
+ 182:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+		return;
+ 186:	a3 c0       	rjmp	.+326    	; 0x2ce <checkWheelsFrequencies+0x1cc>
+	}else if (microsRearWheel > MAX_PERIOD && frontWheelUnreadPulsesNumber>=5){ // Front Wheel moved
+ 188:	80 91 16 01 	lds	r24, 0x0116	; 0x800116 <microsRearWheel>
+ 18c:	90 91 17 01 	lds	r25, 0x0117	; 0x800117 <microsRearWheel+0x1>
+ 190:	a0 91 18 01 	lds	r26, 0x0118	; 0x800118 <microsRearWheel+0x2>
+ 194:	b0 91 19 01 	lds	r27, 0x0119	; 0x800119 <microsRearWheel+0x3>
+ 198:	81 31       	cpi	r24, 0x11	; 17
+ 19a:	97 42       	sbci	r25, 0x27	; 39
+ 19c:	a1 05       	cpc	r26, r1
+ 19e:	b1 05       	cpc	r27, r1
+ 1a0:	a8 f0       	brcs	.+42     	; 0x1cc <checkWheelsFrequencies+0xca>
+ 1a2:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <frontWheelUnreadPulsesNumber>
+ 1a6:	90 91 05 01 	lds	r25, 0x0105	; 0x800105 <frontWheelUnreadPulsesNumber+0x1>
+ 1aa:	05 97       	sbiw	r24, 0x05	; 5
+ 1ac:	7c f0       	brlt	.+30     	; 0x1cc <checkWheelsFrequencies+0xca>
+		microsRearWheel=0;
+ 1ae:	10 92 16 01 	sts	0x0116, r1	; 0x800116 <microsRearWheel>
+ 1b2:	10 92 17 01 	sts	0x0117, r1	; 0x800117 <microsRearWheel+0x1>
+ 1b6:	10 92 18 01 	sts	0x0118, r1	; 0x800118 <microsRearWheel+0x2>
+ 1ba:	10 92 19 01 	sts	0x0119, r1	; 0x800119 <microsRearWheel+0x3>
+		checkWheelsFrequenciesReturnValue = -1;
+ 1be:	8f ef       	ldi	r24, 0xFF	; 255
+ 1c0:	9f ef       	ldi	r25, 0xFF	; 255
+ 1c2:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <_edata+0x1>
+ 1c6:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+		return;
+ 1ca:	81 c0       	rjmp	.+258    	; 0x2ce <checkWheelsFrequencies+0x1cc>
+	}
+	//if (frontWheelPeriod == 0 || rearWheelPeriod == 0) return;
+	
+	// Check if blocked (one wheel sends pulses and the other is blocked so no pulses are send)
+	if ((frontWheelUnreadPulsesNumber==0 || rearWheelUnreadPulsesNumber==0) && 
+ 1cc:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <frontWheelUnreadPulsesNumber>
+ 1d0:	90 91 05 01 	lds	r25, 0x0105	; 0x800105 <frontWheelUnreadPulsesNumber+0x1>
+ 1d4:	00 97       	sbiw	r24, 0x00	; 0
+ 1d6:	41 f0       	breq	.+16     	; 0x1e8 <checkWheelsFrequencies+0xe6>
+ 1d8:	20 91 02 01 	lds	r18, 0x0102	; 0x800102 <rearWheelUnreadPulsesNumber>
+ 1dc:	30 91 03 01 	lds	r19, 0x0103	; 0x800103 <rearWheelUnreadPulsesNumber+0x1>
+ 1e0:	23 2b       	or	r18, r19
+ 1e2:	09 f4       	brne	.+2      	; 0x1e6 <checkWheelsFrequencies+0xe4>
+ 1e4:	71 c0       	rjmp	.+226    	; 0x2c8 <checkWheelsFrequencies+0x1c6>
+ 1e6:	07 c0       	rjmp	.+14     	; 0x1f6 <checkWheelsFrequencies+0xf4>
+		(frontWheelUnreadPulsesNumber<2 && rearWheelUnreadPulsesNumber<2)) return;
+ 1e8:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <rearWheelUnreadPulsesNumber>
+ 1ec:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <rearWheelUnreadPulsesNumber+0x1>
+ 1f0:	02 97       	sbiw	r24, 0x02	; 2
+ 1f2:	0c f4       	brge	.+2      	; 0x1f6 <checkWheelsFrequencies+0xf4>
+ 1f4:	6c c0       	rjmp	.+216    	; 0x2ce <checkWheelsFrequencies+0x1cc>
+	int32_t difference = frontWheelPeriod-rearWheelPeriod;
+ 1f6:	80 91 0a 01 	lds	r24, 0x010A	; 0x80010a <frontWheelPeriod>
+ 1fa:	90 91 0b 01 	lds	r25, 0x010B	; 0x80010b <frontWheelPeriod+0x1>
+ 1fe:	a0 91 0c 01 	lds	r26, 0x010C	; 0x80010c <frontWheelPeriod+0x2>
+ 202:	b0 91 0d 01 	lds	r27, 0x010D	; 0x80010d <frontWheelPeriod+0x3>
+ 206:	00 91 06 01 	lds	r16, 0x0106	; 0x800106 <rearWheelPeriod>
+ 20a:	10 91 07 01 	lds	r17, 0x0107	; 0x800107 <rearWheelPeriod+0x1>
+ 20e:	20 91 08 01 	lds	r18, 0x0108	; 0x800108 <rearWheelPeriod+0x2>
+ 212:	30 91 09 01 	lds	r19, 0x0109	; 0x800109 <rearWheelPeriod+0x3>
+ 216:	ac 01       	movw	r20, r24
+ 218:	bd 01       	movw	r22, r26
+ 21a:	40 1b       	sub	r20, r16
+ 21c:	51 0b       	sbc	r21, r17
+ 21e:	62 0b       	sbc	r22, r18
+ 220:	73 0b       	sbc	r23, r19
+	int32_t minPeriod = (frontWheelPeriod<rearWheelPeriod?frontWheelPeriod:rearWheelPeriod)<<4;
+ 222:	08 17       	cp	r16, r24
+ 224:	19 07       	cpc	r17, r25
+ 226:	2a 07       	cpc	r18, r26
+ 228:	3b 07       	cpc	r19, r27
+ 22a:	10 f4       	brcc	.+4      	; 0x230 <checkWheelsFrequencies+0x12e>
+ 22c:	d9 01       	movw	r26, r18
+ 22e:	c8 01       	movw	r24, r16
+ 230:	88 0f       	add	r24, r24
+ 232:	99 1f       	adc	r25, r25
+ 234:	aa 1f       	adc	r26, r26
+ 236:	bb 1f       	adc	r27, r27
+ 238:	88 0f       	add	r24, r24
+ 23a:	99 1f       	adc	r25, r25
+ 23c:	aa 1f       	adc	r26, r26
+ 23e:	bb 1f       	adc	r27, r27
+ 240:	88 0f       	add	r24, r24
+ 242:	99 1f       	adc	r25, r25
+ 244:	aa 1f       	adc	r26, r26
+ 246:	bb 1f       	adc	r27, r27
+ 248:	88 0f       	add	r24, r24
+ 24a:	99 1f       	adc	r25, r25
+ 24c:	aa 1f       	adc	r26, r26
+ 24e:	bb 1f       	adc	r27, r27
+	if(difference>minPeriod) checkWheelsFrequenciesReturnValue = 1;
+ 250:	84 17       	cp	r24, r20
+ 252:	95 07       	cpc	r25, r21
+ 254:	a6 07       	cpc	r26, r22
+ 256:	b7 07       	cpc	r27, r23
+ 258:	3c f4       	brge	.+14     	; 0x268 <checkWheelsFrequencies+0x166>
+ 25a:	81 e0       	ldi	r24, 0x01	; 1
+ 25c:	90 e0       	ldi	r25, 0x00	; 0
+ 25e:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <_edata+0x1>
+ 262:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 266:	17 c0       	rjmp	.+46     	; 0x296 <checkWheelsFrequencies+0x194>
+	else if (difference<-minPeriod) checkWheelsFrequenciesReturnValue = -1;
+ 268:	b0 95       	com	r27
+ 26a:	a0 95       	com	r26
+ 26c:	90 95       	com	r25
+ 26e:	81 95       	neg	r24
+ 270:	9f 4f       	sbci	r25, 0xFF	; 255
+ 272:	af 4f       	sbci	r26, 0xFF	; 255
+ 274:	bf 4f       	sbci	r27, 0xFF	; 255
+ 276:	48 17       	cp	r20, r24
+ 278:	59 07       	cpc	r21, r25
+ 27a:	6a 07       	cpc	r22, r26
+ 27c:	7b 07       	cpc	r23, r27
+ 27e:	3c f4       	brge	.+14     	; 0x28e <checkWheelsFrequencies+0x18c>
+ 280:	8f ef       	ldi	r24, 0xFF	; 255
+ 282:	9f ef       	ldi	r25, 0xFF	; 255
+ 284:	90 93 01 01 	sts	0x0101, r25	; 0x800101 <_edata+0x1>
+ 288:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <_edata>
+ 28c:	04 c0       	rjmp	.+8      	; 0x296 <checkWheelsFrequencies+0x194>
+	else checkWheelsFrequenciesReturnValue = 0;
+ 28e:	10 92 01 01 	sts	0x0101, r1	; 0x800101 <_edata+0x1>
+ 292:	10 92 00 01 	sts	0x0100, r1	; 0x800100 <_edata>
+	// Reinitialize for the new measurements
+	frontWheelPeriod=0;
+ 296:	10 92 0a 01 	sts	0x010A, r1	; 0x80010a <frontWheelPeriod>
+ 29a:	10 92 0b 01 	sts	0x010B, r1	; 0x80010b <frontWheelPeriod+0x1>
+ 29e:	10 92 0c 01 	sts	0x010C, r1	; 0x80010c <frontWheelPeriod+0x2>
+ 2a2:	10 92 0d 01 	sts	0x010D, r1	; 0x80010d <frontWheelPeriod+0x3>
+	rearWheelPeriod=0;
+ 2a6:	10 92 06 01 	sts	0x0106, r1	; 0x800106 <rearWheelPeriod>
+ 2aa:	10 92 07 01 	sts	0x0107, r1	; 0x800107 <rearWheelPeriod+0x1>
+ 2ae:	10 92 08 01 	sts	0x0108, r1	; 0x800108 <rearWheelPeriod+0x2>
+ 2b2:	10 92 09 01 	sts	0x0109, r1	; 0x800109 <rearWheelPeriod+0x3>
+	frontWheelUnreadPulsesNumber=0;
+ 2b6:	10 92 05 01 	sts	0x0105, r1	; 0x800105 <frontWheelUnreadPulsesNumber+0x1>
+ 2ba:	10 92 04 01 	sts	0x0104, r1	; 0x800104 <frontWheelUnreadPulsesNumber>
+	rearWheelUnreadPulsesNumber=0;
+ 2be:	10 92 03 01 	sts	0x0103, r1	; 0x800103 <rearWheelUnreadPulsesNumber+0x1>
+ 2c2:	10 92 02 01 	sts	0x0102, r1	; 0x800102 <rearWheelUnreadPulsesNumber>
+ 2c6:	03 c0       	rjmp	.+6      	; 0x2ce <checkWheelsFrequencies+0x1cc>
+		return;
+	}
+	//if (frontWheelPeriod == 0 || rearWheelPeriod == 0) return;
+	
+	// Check if blocked (one wheel sends pulses and the other is blocked so no pulses are send)
+	if ((frontWheelUnreadPulsesNumber==0 || rearWheelUnreadPulsesNumber==0) && 
+ 2c8:	02 97       	sbiw	r24, 0x02	; 2
+ 2ca:	0c f0       	brlt	.+2      	; 0x2ce <checkWheelsFrequencies+0x1cc>
+ 2cc:	94 cf       	rjmp	.-216    	; 0x1f6 <checkWheelsFrequencies+0xf4>
+	// Reinitialize for the new measurements
+	frontWheelPeriod=0;
+	rearWheelPeriod=0;
+	frontWheelUnreadPulsesNumber=0;
+	rearWheelUnreadPulsesNumber=0;
+}
+ 2ce:	1f 91       	pop	r17
+ 2d0:	0f 91       	pop	r16
+ 2d2:	08 95       	ret
+
+000002d4 <setServoPosition>:
+
+// Sets the Servo PWM duty cycle to PB1 & PB2 for controlling the front & rear servo
+// MinValue = 0 - MaxValue = 235 
+void setServoPosition(int value){
+ 2d4:	cf 93       	push	r28
+ 2d6:	df 93       	push	r29
+ 2d8:	d8 2f       	mov	r29, r24
+ 2da:	c9 2f       	mov	r28, r25
+	checkWheelsFrequencies();
+ 2dc:	0e 94 81 00 	call	0x102	; 0x102 <checkWheelsFrequencies>
+ 2e0:	8d 2f       	mov	r24, r29
+ 2e2:	9c 2f       	mov	r25, r28
+ 2e4:	99 23       	and	r25, r25
+ 2e6:	14 f4       	brge	.+4      	; 0x2ec <setServoPosition+0x18>
+ 2e8:	80 e0       	ldi	r24, 0x00	; 0
+ 2ea:	90 e0       	ldi	r25, 0x00	; 0
+ 2ec:	8c 3e       	cpi	r24, 0xEC	; 236
+ 2ee:	91 05       	cpc	r25, r1
+ 2f0:	14 f0       	brlt	.+4      	; 0x2f6 <setServoPosition+0x22>
+ 2f2:	8b ee       	ldi	r24, 0xEB	; 235
+ 2f4:	90 e0       	ldi	r25, 0x00	; 0
+	if(value>235) value=235; else if(value<0) value=0; // Check for valid value boundaries
+	// If front frequency < rear frequency cut the front brake down, else apply the value
+	OCR1A = 1000 + (checkWheelsFrequenciesReturnValue == 1 ? 0 : value<<4);
+ 2f6:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <_edata>
+ 2fa:	30 91 01 01 	lds	r19, 0x0101	; 0x800101 <_edata+0x1>
+ 2fe:	21 30       	cpi	r18, 0x01	; 1
+ 300:	31 05       	cpc	r19, r1
+ 302:	51 f0       	breq	.+20     	; 0x318 <setServoPosition+0x44>
+ 304:	9c 01       	movw	r18, r24
+ 306:	22 95       	swap	r18
+ 308:	32 95       	swap	r19
+ 30a:	30 7f       	andi	r19, 0xF0	; 240
+ 30c:	32 27       	eor	r19, r18
+ 30e:	20 7f       	andi	r18, 0xF0	; 240
+ 310:	32 27       	eor	r19, r18
+ 312:	28 51       	subi	r18, 0x18	; 24
+ 314:	3c 4f       	sbci	r19, 0xFC	; 252
+ 316:	02 c0       	rjmp	.+4      	; 0x31c <setServoPosition+0x48>
+ 318:	28 ee       	ldi	r18, 0xE8	; 232
+ 31a:	33 e0       	ldi	r19, 0x03	; 3
+ 31c:	30 93 89 00 	sts	0x0089, r19	; 0x800089 <__TEXT_REGION_LENGTH__+0x7e0089>
+ 320:	20 93 88 00 	sts	0x0088, r18	; 0x800088 <__TEXT_REGION_LENGTH__+0x7e0088>
+	// If rear frequency < front frequency cut the front brake down, else apply the value
+	OCR1B = 1000 + (checkWheelsFrequenciesReturnValue == -1 ? 0 : value<<4);
+ 324:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <_edata>
+ 328:	30 91 01 01 	lds	r19, 0x0101	; 0x800101 <_edata+0x1>
+ 32c:	2f 3f       	cpi	r18, 0xFF	; 255
+ 32e:	3f 4f       	sbci	r19, 0xFF	; 255
+ 330:	49 f0       	breq	.+18     	; 0x344 <setServoPosition+0x70>
+ 332:	82 95       	swap	r24
+ 334:	92 95       	swap	r25
+ 336:	90 7f       	andi	r25, 0xF0	; 240
+ 338:	98 27       	eor	r25, r24
+ 33a:	80 7f       	andi	r24, 0xF0	; 240
+ 33c:	98 27       	eor	r25, r24
+ 33e:	88 51       	subi	r24, 0x18	; 24
+ 340:	9c 4f       	sbci	r25, 0xFC	; 252
+ 342:	02 c0       	rjmp	.+4      	; 0x348 <setServoPosition+0x74>
+ 344:	88 ee       	ldi	r24, 0xE8	; 232
+ 346:	93 e0       	ldi	r25, 0x03	; 3
+ 348:	90 93 8b 00 	sts	0x008B, r25	; 0x80008b <__TEXT_REGION_LENGTH__+0x7e008b>
+ 34c:	80 93 8a 00 	sts	0x008A, r24	; 0x80008a <__TEXT_REGION_LENGTH__+0x7e008a>
+}
+ 350:	df 91       	pop	r29
+ 352:	cf 91       	pop	r28
+ 354:	08 95       	ret
+
+00000356 <__vector_21>:
+
+// ADC Interrupt Service Routine
+// Sets the Servo Position linearly inverted to the Slider position
+ISR (ADC_vect){
+ 356:	1f 92       	push	r1
+ 358:	0f 92       	push	r0
+ 35a:	0f b6       	in	r0, 0x3f	; 63
+ 35c:	0f 92       	push	r0
+ 35e:	11 24       	eor	r1, r1
+ 360:	2f 93       	push	r18
+ 362:	3f 93       	push	r19
+ 364:	4f 93       	push	r20
+ 366:	5f 93       	push	r21
+ 368:	6f 93       	push	r22
+ 36a:	7f 93       	push	r23
+ 36c:	8f 93       	push	r24
+ 36e:	9f 93       	push	r25
+ 370:	af 93       	push	r26
+ 372:	bf 93       	push	r27
+ 374:	ef 93       	push	r30
+ 376:	ff 93       	push	r31
+	// Slider value inversion and offsetting (256 Slider values - ADCH - 128 values offset = 128 - ADCH)
+	setServoPosition(128 - ADCH); // Set servos' positions equally to the sliders inverted position
+ 378:	90 91 79 00 	lds	r25, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7e0079>
+ 37c:	20 e8       	ldi	r18, 0x80	; 128
+ 37e:	30 e0       	ldi	r19, 0x00	; 0
+ 380:	a9 01       	movw	r20, r18
+ 382:	49 1b       	sub	r20, r25
+ 384:	51 09       	sbc	r21, r1
+ 386:	ca 01       	movw	r24, r20
+ 388:	0e 94 6a 01 	call	0x2d4	; 0x2d4 <setServoPosition>
+	//wdt_reset(); // Reset watchdog timers
+}
+ 38c:	ff 91       	pop	r31
+ 38e:	ef 91       	pop	r30
+ 390:	bf 91       	pop	r27
+ 392:	af 91       	pop	r26
+ 394:	9f 91       	pop	r25
+ 396:	8f 91       	pop	r24
+ 398:	7f 91       	pop	r23
+ 39a:	6f 91       	pop	r22
+ 39c:	5f 91       	pop	r21
+ 39e:	4f 91       	pop	r20
+ 3a0:	3f 91       	pop	r19
+ 3a2:	2f 91       	pop	r18
+ 3a4:	0f 90       	pop	r0
+ 3a6:	0f be       	out	0x3f, r0	; 63
+ 3a8:	0f 90       	pop	r0
+ 3aa:	1f 90       	pop	r1
+ 3ac:	18 95       	reti
+
+000003ae <__vector_14>:
+
+// Counting clock ticks for each wheel's Photo-Interrupter Sensor
+ISR(TIMER0_COMPA_vect){
+ 3ae:	1f 92       	push	r1
+ 3b0:	0f 92       	push	r0
+ 3b2:	0f b6       	in	r0, 0x3f	; 63
+ 3b4:	0f 92       	push	r0
+ 3b6:	11 24       	eor	r1, r1
+ 3b8:	8f 93       	push	r24
+ 3ba:	9f 93       	push	r25
+ 3bc:	af 93       	push	r26
+ 3be:	bf 93       	push	r27
+	microsFrontWheel++;
+ 3c0:	80 91 1a 01 	lds	r24, 0x011A	; 0x80011a <microsFrontWheel>
+ 3c4:	90 91 1b 01 	lds	r25, 0x011B	; 0x80011b <microsFrontWheel+0x1>
+ 3c8:	a0 91 1c 01 	lds	r26, 0x011C	; 0x80011c <microsFrontWheel+0x2>
+ 3cc:	b0 91 1d 01 	lds	r27, 0x011D	; 0x80011d <microsFrontWheel+0x3>
+ 3d0:	01 96       	adiw	r24, 0x01	; 1
+ 3d2:	a1 1d       	adc	r26, r1
+ 3d4:	b1 1d       	adc	r27, r1
+ 3d6:	80 93 1a 01 	sts	0x011A, r24	; 0x80011a <microsFrontWheel>
+ 3da:	90 93 1b 01 	sts	0x011B, r25	; 0x80011b <microsFrontWheel+0x1>
+ 3de:	a0 93 1c 01 	sts	0x011C, r26	; 0x80011c <microsFrontWheel+0x2>
+ 3e2:	b0 93 1d 01 	sts	0x011D, r27	; 0x80011d <microsFrontWheel+0x3>
+	microsRearWheel++;
+ 3e6:	80 91 16 01 	lds	r24, 0x0116	; 0x800116 <microsRearWheel>
+ 3ea:	90 91 17 01 	lds	r25, 0x0117	; 0x800117 <microsRearWheel+0x1>
+ 3ee:	a0 91 18 01 	lds	r26, 0x0118	; 0x800118 <microsRearWheel+0x2>
+ 3f2:	b0 91 19 01 	lds	r27, 0x0119	; 0x800119 <microsRearWheel+0x3>
+ 3f6:	01 96       	adiw	r24, 0x01	; 1
+ 3f8:	a1 1d       	adc	r26, r1
+ 3fa:	b1 1d       	adc	r27, r1
+ 3fc:	80 93 16 01 	sts	0x0116, r24	; 0x800116 <microsRearWheel>
+ 400:	90 93 17 01 	sts	0x0117, r25	; 0x800117 <microsRearWheel+0x1>
+ 404:	a0 93 18 01 	sts	0x0118, r26	; 0x800118 <microsRearWheel+0x2>
+ 408:	b0 93 19 01 	sts	0x0119, r27	; 0x800119 <microsRearWheel+0x3>
+}
+ 40c:	bf 91       	pop	r27
+ 40e:	af 91       	pop	r26
+ 410:	9f 91       	pop	r25
+ 412:	8f 91       	pop	r24
+ 414:	0f 90       	pop	r0
+ 416:	0f be       	out	0x3f, r0	; 63
+ 418:	0f 90       	pop	r0
+ 41a:	1f 90       	pop	r1
+ 41c:	18 95       	reti
+
+0000041e <__vector_1>:
+
+// Front Photo-Interrupter Sensor Interrupt Service Routine
+// Calculates the sensor's pulse width in tenths of microseconds
+ISR(INT0_vect){
+ 41e:	1f 92       	push	r1
+ 420:	0f 92       	push	r0
+ 422:	0f b6       	in	r0, 0x3f	; 63
+ 424:	0f 92       	push	r0
+ 426:	11 24       	eor	r1, r1
+ 428:	4f 93       	push	r20
+ 42a:	5f 93       	push	r21
+ 42c:	6f 93       	push	r22
+ 42e:	7f 93       	push	r23
+ 430:	8f 93       	push	r24
+ 432:	9f 93       	push	r25
+ 434:	af 93       	push	r26
+ 436:	bf 93       	push	r27
+	// if interrupt is triggered on the rising edge store the starting time
+	// else if interrupt is triggered on the falling edge sud starting time with current 
+	// time to calculate the pulse's period
+	if(PIND & 1<<PORTD2){ 
+ 438:	4a 9b       	sbis	0x09, 2	; 9
+ 43a:	11 c0       	rjmp	.+34     	; 0x45e <__vector_1+0x40>
+		startFrontWheel = microsFrontWheel;
+ 43c:	80 91 1a 01 	lds	r24, 0x011A	; 0x80011a <microsFrontWheel>
+ 440:	90 91 1b 01 	lds	r25, 0x011B	; 0x80011b <microsFrontWheel+0x1>
+ 444:	a0 91 1c 01 	lds	r26, 0x011C	; 0x80011c <microsFrontWheel+0x2>
+ 448:	b0 91 1d 01 	lds	r27, 0x011D	; 0x80011d <microsFrontWheel+0x3>
+ 44c:	80 93 12 01 	sts	0x0112, r24	; 0x800112 <startFrontWheel>
+ 450:	90 93 13 01 	sts	0x0113, r25	; 0x800113 <startFrontWheel+0x1>
+ 454:	a0 93 14 01 	sts	0x0114, r26	; 0x800114 <startFrontWheel+0x2>
+ 458:	b0 93 15 01 	sts	0x0115, r27	; 0x800115 <startFrontWheel+0x3>
+ 45c:	2d c0       	rjmp	.+90     	; 0x4b8 <__vector_1+0x9a>
+	}else{ 
+		frontWheelPeriod = microsFrontWheel-startFrontWheel;
+ 45e:	80 91 1a 01 	lds	r24, 0x011A	; 0x80011a <microsFrontWheel>
+ 462:	90 91 1b 01 	lds	r25, 0x011B	; 0x80011b <microsFrontWheel+0x1>
+ 466:	a0 91 1c 01 	lds	r26, 0x011C	; 0x80011c <microsFrontWheel+0x2>
+ 46a:	b0 91 1d 01 	lds	r27, 0x011D	; 0x80011d <microsFrontWheel+0x3>
+ 46e:	40 91 12 01 	lds	r20, 0x0112	; 0x800112 <startFrontWheel>
+ 472:	50 91 13 01 	lds	r21, 0x0113	; 0x800113 <startFrontWheel+0x1>
+ 476:	60 91 14 01 	lds	r22, 0x0114	; 0x800114 <startFrontWheel+0x2>
+ 47a:	70 91 15 01 	lds	r23, 0x0115	; 0x800115 <startFrontWheel+0x3>
+ 47e:	84 1b       	sub	r24, r20
+ 480:	95 0b       	sbc	r25, r21
+ 482:	a6 0b       	sbc	r26, r22
+ 484:	b7 0b       	sbc	r27, r23
+ 486:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <frontWheelPeriod>
+ 48a:	90 93 0b 01 	sts	0x010B, r25	; 0x80010b <frontWheelPeriod+0x1>
+ 48e:	a0 93 0c 01 	sts	0x010C, r26	; 0x80010c <frontWheelPeriod+0x2>
+ 492:	b0 93 0d 01 	sts	0x010D, r27	; 0x80010d <frontWheelPeriod+0x3>
+		frontWheelUnreadPulsesNumber++;
+ 496:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <frontWheelUnreadPulsesNumber>
+ 49a:	90 91 05 01 	lds	r25, 0x0105	; 0x800105 <frontWheelUnreadPulsesNumber+0x1>
+ 49e:	01 96       	adiw	r24, 0x01	; 1
+ 4a0:	90 93 05 01 	sts	0x0105, r25	; 0x800105 <frontWheelUnreadPulsesNumber+0x1>
+ 4a4:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <frontWheelUnreadPulsesNumber>
+		microsFrontWheel=0; // Restart time counting
+ 4a8:	10 92 1a 01 	sts	0x011A, r1	; 0x80011a <microsFrontWheel>
+ 4ac:	10 92 1b 01 	sts	0x011B, r1	; 0x80011b <microsFrontWheel+0x1>
+ 4b0:	10 92 1c 01 	sts	0x011C, r1	; 0x80011c <microsFrontWheel+0x2>
+ 4b4:	10 92 1d 01 	sts	0x011D, r1	; 0x80011d <microsFrontWheel+0x3>
+	}
+}
+ 4b8:	bf 91       	pop	r27
+ 4ba:	af 91       	pop	r26
+ 4bc:	9f 91       	pop	r25
+ 4be:	8f 91       	pop	r24
+ 4c0:	7f 91       	pop	r23
+ 4c2:	6f 91       	pop	r22
+ 4c4:	5f 91       	pop	r21
+ 4c6:	4f 91       	pop	r20
+ 4c8:	0f 90       	pop	r0
+ 4ca:	0f be       	out	0x3f, r0	; 63
+ 4cc:	0f 90       	pop	r0
+ 4ce:	1f 90       	pop	r1
+ 4d0:	18 95       	reti
+
+000004d2 <__vector_2>:
+
+// Rear Photo-Interrupter Sensor Interrupt Service Routine
+// Calculates the sensor's pulse width in tenths of microseconds
+ISR(INT1_vect){
+ 4d2:	1f 92       	push	r1
+ 4d4:	0f 92       	push	r0
+ 4d6:	0f b6       	in	r0, 0x3f	; 63
+ 4d8:	0f 92       	push	r0
+ 4da:	11 24       	eor	r1, r1
+ 4dc:	4f 93       	push	r20
+ 4de:	5f 93       	push	r21
+ 4e0:	6f 93       	push	r22
+ 4e2:	7f 93       	push	r23
+ 4e4:	8f 93       	push	r24
+ 4e6:	9f 93       	push	r25
+ 4e8:	af 93       	push	r26
+ 4ea:	bf 93       	push	r27
+	// if interrupt is triggered on the rising edge store the starting time
+	// else if interrupt is triggered on the falling edge sud starting time with current
+	// time to calculate the pulse's period
+	if(PIND & 1<<PORTD3){
+ 4ec:	4b 9b       	sbis	0x09, 3	; 9
+ 4ee:	11 c0       	rjmp	.+34     	; 0x512 <__vector_2+0x40>
+		startRearWheel = microsRearWheel;
+ 4f0:	80 91 16 01 	lds	r24, 0x0116	; 0x800116 <microsRearWheel>
+ 4f4:	90 91 17 01 	lds	r25, 0x0117	; 0x800117 <microsRearWheel+0x1>
+ 4f8:	a0 91 18 01 	lds	r26, 0x0118	; 0x800118 <microsRearWheel+0x2>
+ 4fc:	b0 91 19 01 	lds	r27, 0x0119	; 0x800119 <microsRearWheel+0x3>
+ 500:	80 93 0e 01 	sts	0x010E, r24	; 0x80010e <startRearWheel>
+ 504:	90 93 0f 01 	sts	0x010F, r25	; 0x80010f <startRearWheel+0x1>
+ 508:	a0 93 10 01 	sts	0x0110, r26	; 0x800110 <startRearWheel+0x2>
+ 50c:	b0 93 11 01 	sts	0x0111, r27	; 0x800111 <startRearWheel+0x3>
+ 510:	2d c0       	rjmp	.+90     	; 0x56c <__vector_2+0x9a>
+	}else{
+		rearWheelPeriod = microsRearWheel-startRearWheel;
+ 512:	80 91 16 01 	lds	r24, 0x0116	; 0x800116 <microsRearWheel>
+ 516:	90 91 17 01 	lds	r25, 0x0117	; 0x800117 <microsRearWheel+0x1>
+ 51a:	a0 91 18 01 	lds	r26, 0x0118	; 0x800118 <microsRearWheel+0x2>
+ 51e:	b0 91 19 01 	lds	r27, 0x0119	; 0x800119 <microsRearWheel+0x3>
+ 522:	40 91 0e 01 	lds	r20, 0x010E	; 0x80010e <startRearWheel>
+ 526:	50 91 0f 01 	lds	r21, 0x010F	; 0x80010f <startRearWheel+0x1>
+ 52a:	60 91 10 01 	lds	r22, 0x0110	; 0x800110 <startRearWheel+0x2>
+ 52e:	70 91 11 01 	lds	r23, 0x0111	; 0x800111 <startRearWheel+0x3>
+ 532:	84 1b       	sub	r24, r20
+ 534:	95 0b       	sbc	r25, r21
+ 536:	a6 0b       	sbc	r26, r22
+ 538:	b7 0b       	sbc	r27, r23
+ 53a:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <rearWheelPeriod>
+ 53e:	90 93 07 01 	sts	0x0107, r25	; 0x800107 <rearWheelPeriod+0x1>
+ 542:	a0 93 08 01 	sts	0x0108, r26	; 0x800108 <rearWheelPeriod+0x2>
+ 546:	b0 93 09 01 	sts	0x0109, r27	; 0x800109 <rearWheelPeriod+0x3>
+		rearWheelUnreadPulsesNumber++;
+ 54a:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <rearWheelUnreadPulsesNumber>
+ 54e:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <rearWheelUnreadPulsesNumber+0x1>
+ 552:	01 96       	adiw	r24, 0x01	; 1
+ 554:	90 93 03 01 	sts	0x0103, r25	; 0x800103 <rearWheelUnreadPulsesNumber+0x1>
+ 558:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <rearWheelUnreadPulsesNumber>
+		microsRearWheel=0; // Restart time counting
+ 55c:	10 92 16 01 	sts	0x0116, r1	; 0x800116 <microsRearWheel>
+ 560:	10 92 17 01 	sts	0x0117, r1	; 0x800117 <microsRearWheel+0x1>
+ 564:	10 92 18 01 	sts	0x0118, r1	; 0x800118 <microsRearWheel+0x2>
+ 568:	10 92 19 01 	sts	0x0119, r1	; 0x800119 <microsRearWheel+0x3>
+	}
+}
+ 56c:	bf 91       	pop	r27
+ 56e:	af 91       	pop	r26
+ 570:	9f 91       	pop	r25
+ 572:	8f 91       	pop	r24
+ 574:	7f 91       	pop	r23
+ 576:	6f 91       	pop	r22
+ 578:	5f 91       	pop	r21
+ 57a:	4f 91       	pop	r20
+ 57c:	0f 90       	pop	r0
+ 57e:	0f be       	out	0x3f, r0	; 63
+ 580:	0f 90       	pop	r0
+ 582:	1f 90       	pop	r1
+ 584:	18 95       	reti
+
+00000586 <main>:
+
+int main(void){
+	ADCinit();
+ 586:	0e 94 48 00 	call	0x90	; 0x90 <ADCinit>
+	MicrosTimerInit();
+ 58a:	0e 94 60 00 	call	0xc0	; 0xc0 <MicrosTimerInit>
+	PhotoInterruptersInit();
+ 58e:	0e 94 68 00 	call	0xd0	; 0xd0 <PhotoInterruptersInit>
+	ServoPWMinit();
+ 592:	0e 94 6e 00 	call	0xdc	; 0xdc <ServoPWMinit>
+	//WDTInit();
+	sei();
+ 596:	78 94       	sei
+ 598:	ff cf       	rjmp	.-2      	; 0x598 <main+0x12>
+
+0000059a <_exit>:
+ 59a:	f8 94       	cli
+
+0000059c <__stop_program>:
+ 59c:	ff cf       	rjmp	.-2      	; 0x59c <__stop_program>
